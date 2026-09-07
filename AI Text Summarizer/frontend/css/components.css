@@ -1,0 +1,45 @@
+.output-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.loading {
+    margin-top: 12px;
+    color: var(--primary);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 13px 16px;
+    border-radius: 9px;
+    font-size: 0.9rem;
+}
+
+.message-error {
+    border: 1px solid #f3c3c0;
+    background: #fff5f4;
+    color: var(--danger);
+}
+
+.message-success {
+    border: 1px solid #b7e3cf;
+    background: #f1fbf6;
+    color: var(--success);
+}
+
+.summary-stats {
+    padding-top: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .button {
+        transition: none;
+    }
+}
