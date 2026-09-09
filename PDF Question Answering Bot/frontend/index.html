@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="description"
+        content="Ask intelligent questions about your PDF documents using AI-powered retrieval."
+    >
+    <meta
+        name="theme-color"
+        content="#0b1020"
+    >
+
+    <title>PDF Question Answering Bot</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+
+    <script src="./config.js"></script>
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">PDF</div>
+
+                <div class="brand-copy">
+                    <h1>PDF Q&A</h1>
+                    <span>AI Document Intelligence</span>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <span
+                    id="systemStatus"
+                    class="status-badge status-offline"
+                >
+                    Checking system...
+                </span>
+
+                <a
+                    href="/docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="docs-link"
+                >
+                    API Docs
+                </a>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <section class="hero-section">
+                <div class="hero-copy">
+                    <span class="eyebrow">
+                        Retrieval-Augmented Generation
+                    </span>
+
+                    <h2>
+                        Ask anything about your PDFs.
+                    </h2>
+
+                    <p>
+                        Upload a document, let the system understand
+                        its contents, then ask questions and receive
+                        grounded answers with page-level sources.
+                    </p>
+                </div>
+            </section>
+
+            <section class="workspace">
+
+                <aside class="sidebar">
+
+                    <div class="panel upload-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="panel-label">
+                                    Documents
+                                </span>
+
+                                <h3>Your knowledge base</h3>
+                            </div>
+
+                            <span
+                                id="documentCount"
+                                class="count-badge"
+                            >
+                                0
+                            </span>
+                        </div>
+
+                        <label
+                            for="pdfInput"
+                            id="dropZone"
+                            class="drop-zone"
+                        >
+                            <input
+                                type="file"
+                                id="pdfInput"
+                                accept=".pdf,application/pdf"
+                                hidden
+                            >
+
+                            <div class="upload-icon">
+                                ↑
+                            </div>
+
+                            <strong>
+                                Drop a PDF here
+                            </strong>
+
+                            <span>
+                                or click to browse
+                            </span>
+
+                            <small>
+                                PDF files up to 25 MB
+                            </small>
+                        </label>
+
+                        <div
+                            id="uploadProgressContainer"
+                            class="upload-progress-container hidden"
+                        >
+                            <div class="progress-header">
+                                <span id="uploadStatus">
+                                    Processing...
+                                </span>
+
+                                <span id="uploadPercentage">
+                                    0%
+                                </span>
+                            </div>
+
+                            <div class="progress-track">
+                                <div
+                                    id="uploadProgress"
+                                    class="progress-bar"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel documents-panel">
+                        <div class="panel-heading compact">
+                            <h3>Uploaded documents</h3>
+
+                            <button
+                                id="refreshDocuments"
+                                class="icon-button"
+                                type="button"
+                                title="Refresh documents"
+                            >
+                                ↻
+                            </button>
+                        </div>
+
+                        <div
+                            id="documentList"
+                            class="document-list"
+                        >
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    ▱
+                                </div>
+
+                                <p>
+                                    No documents uploaded yet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <section class="chat-panel">
+
+                    <div class="chat-header">
+                        <div>
+                            <span class="panel-label">
+                                Question answering
+                            </span>
+
+                            <h3 id="activeDocumentTitle">
+                                All documents
+                            </h3>
+                        </div>
+
+                        <button
+                            id="clearChat"
+                            class="secondary-button"
+                            type="button"
+                        >
+                            Clear chat
+                        </button>
+                    </div>
+
+                    <div
+                        id="chatMessages"
+                        class="chat-messages"
+                    >
+                        <div class="welcome-message">
+                            <div class="welcome-icon">
+                                ✦
+                            </div>
+
+                            <h3>
+                                Your PDF assistant is ready.
+                            </h3>
+
+                            <p>
+                                Upload a PDF and ask a question.
+                                Answers are generated from the
+                                indexed document content.
+                            </p>
+
+                            <div class="suggestion-grid">
+                                <button
+                                    class="suggestion"
+                                    type="button"
+                                    data-question="What is this document about?"
+                                >
+                                    What is this document about?
+                                </button>
+
+                                <button
+                                    class="suggestion"
+                                    type="button"
+                                    data-question="Summarize the main findings."
+                                >
+                                    Summarize the main findings.
+                                </button>
+
+                                <button
+                                    class="suggestion"
+                                    type="button"
+                                    data-question="What are the most important conclusions?"
+                                >
+                                    What are the conclusions?
+                                </button>
+
+                                <button
+                                    class="suggestion"
+                                    type="button"
+                                    data-question="What are the key recommendations?"
+                                >
+                                    What are the recommendations?
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-area">
+
+                        <div
+                            id="questionError"
+                            class="form-error hidden"
+                        ></div>
+
+                        <form id="questionForm">
+
+                            <div class="question-input-wrapper">
+                                <textarea
+                                    id="questionInput"
+                                    rows="2"
+                                    maxlength="2000"
+                                    placeholder="Ask a question about your documents..."
+                                    aria-label="Question"
+                                ></textarea>
+
+                                <button
+                                    id="askButton"
+                                    class="ask-button"
+                                    type="submit"
+                                >
+                                    <span id="askButtonText">
+                                        Ask
+                                    </span>
+
+                                    <span
+                                        id="askButtonLoader"
+                                        class="button-loader hidden"
+                                    ></span>
+                                </button>
+                            </div>
+
+                            <div class="input-footer">
+                                <span>
+                                    Press Ctrl + Enter to ask
+                                </span>
+
+                                <span id="characterCounter">
+                                    0 / 2000
+                                </span>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <span>
+                PDF Question Answering Bot
+            </span>
+
+            <span>
+                Powered by RAG
+            </span>
+        </footer>
+
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
