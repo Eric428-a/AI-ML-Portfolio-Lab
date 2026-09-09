@@ -1,0 +1,19 @@
+{
+    "name": "PDF Question Answering Bot Evaluation Dataset",
+    "version": "1.0.0",
+    "description": "Example evaluation questions for the PDF RAG system.",
+    "questions": [
+      {
+        "question": "What is the main topic of the document?",
+        "expected_keywords": []
+      },
+      {
+        "question": "What are the main conclusions?",
+        "expected_keywords": []
+      },
+      {
+        "question": "What recommendations are provided?",
+        "expected_keywords": []
+      }
+    ]
+  }
