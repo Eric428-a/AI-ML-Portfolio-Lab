@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Type checking
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Linting
+.ruff_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Application data
+data/uploads/*
+data/processed/*
+data/chroma/*
+
+!data/uploads/.gitkeep
+!data/processed/.gitkeep
+!data/chroma/.gitkeep
+
+# Models
+models/*
+!models/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Coverage
+.coverage.*
+coverage.xml
+
+# Temporary files
+*.tmp
+*.temp
