@@ -1,0 +1,114 @@
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible,
+label:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+::selection {
+    background: rgba(124, 140, 255, 0.3);
+    color: var(--text-primary);
+}
+
+.document-list,
+.chat-messages {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.document-card {
+    position: relative;
+}
+
+.document-selected::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 9px;
+    bottom: 9px;
+    width: 2px;
+    border-radius: 99px;
+    background: var(--accent);
+}
+
+.chat-message {
+    animation: message-in 220ms ease both;
+}
+
+@keyframes message-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.upload-progress-container {
+    animation: fade-in 180ms ease both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.status-badge::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 6px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.status-online::before {
+    background: var(--success);
+}
+
+.status-offline::before {
+    background: var(--danger);
+}
+
+.ask-button:disabled .button-loader {
+    vertical-align: -2px;
+}
+
+.source-card {
+    transition:
+        border-color var(--transition),
+        background var(--transition);
+}
+
+.source-card:hover {
+    border-color: var(--border-strong);
+    background: rgba(255, 255, 255, 0.03);
+}
