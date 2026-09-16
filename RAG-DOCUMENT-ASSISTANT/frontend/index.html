@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>RAG Document Assistant</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">R</div>
+                <div>
+                    <h1>RAG Document Assistant</h1>
+                    <p>Search and ask questions across your documents</p>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                <span id="system-status">Checking system...</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <section class="documents-panel">
+                <div class="section-header">
+                    <div>
+                        <h2>Documents</h2>
+                        <p id="document-count">0 documents</p>
+                    </div>
+
+                    <label class="upload-button">
+                        <input
+                            type="file"
+                            id="document-input"
+                            accept=".pdf,.txt,.docx"
+                            hidden
+                        >
+                        Upload document
+                    </label>
+                </div>
+
+                <div
+                    id="upload-message"
+                    class="message hidden"
+                ></div>
+
+                <div
+                    id="documents-list"
+                    class="documents-list"
+                >
+                    <div class="empty-state">
+                        <div class="empty-icon">+</div>
+                        <h3>No documents yet</h3>
+                        <p>
+                            Upload a PDF, DOCX, or TXT file
+                            to start asking questions.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chat-panel">
+
+                <div class="chat-header">
+                    <div>
+                        <h2>Ask your documents</h2>
+                        <p>
+                            Questions are answered using
+                            retrieved document context.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="clear-chat"
+                        class="secondary-button"
+                    >
+                        Clear
+                    </button>
+                </div>
+
+                <div
+                    id="chat-messages"
+                    class="chat-messages"
+                >
+                    <div class="welcome-message">
+                        <h3>What would you like to know?</h3>
+                        <p>
+                            Upload documents and ask questions
+                            about their contents.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <textarea
+                        id="question-input"
+                        rows="3"
+                        maxlength="5000"
+                        placeholder="Ask a question about your documents..."
+                    ></textarea>
+
+                    <div class="input-footer">
+                        <span id="selected-documents">
+                            All documents
+                        </span>
+
+                        <button
+                            type="button"
+                            id="send-question"
+                            class="send-button"
+                        >
+                            Send
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/frontend/js/app.js"></script>
+    <script src="/frontend/js/documents.js"></script>
+    <script src="/frontend/js/chat.js"></script>
+</body>
+</html>
