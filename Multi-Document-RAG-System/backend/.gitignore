@@ -1,0 +1,22 @@
+
+## `backend/.gitignore`
+
+```gitignore
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.env
+rag.db
+*.sqlite
+*.sqlite3
+app/storage/uploads/*
+app/storage/vector_db/*
+!app/storage/uploads/.gitkeep
+!app/storage/vector_db/.gitkeep
+.coverage
+htmlcov/
+dist/
+build/
